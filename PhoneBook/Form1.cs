@@ -16,5 +16,11 @@ namespace PhoneBook
         {
             InitializeComponent();
         }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            DBConnection dBConnection = new DBConnection();
+            dBConnection.ConnectToDB(dBConnection.ConnectionString,dgvContacts);
+        }
     }
 }
