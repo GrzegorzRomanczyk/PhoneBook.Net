@@ -14,9 +14,9 @@ namespace PhoneBook
         public string ConnectionString { get; set; } = @"Data Source =.\SQLEXPRESS; Initial Catalog = PhoneBook; Integrated Security=true;";
 
 
-        public void ConnectToDB(string connectionString, DataGridView dgvContacts)
+        public void ConnectToDBAndFillData(string connectionString, DataGridView dgvContacts)
         {
-            using (SqlConnection sqlCon = new SqlConnection(connectionString))
+            using (SqlConnection sqlCon = new SqlConnection(connectionString)) 
             {
                 try
                 {
@@ -29,14 +29,37 @@ namespace PhoneBook
                     MessageBox.Show("Błąd połączenia z bazą danych");
                     return;
                 }
-                
+
                 SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT * FROM Contacts  ", sqlCon);
                 DataTable dtContacts = new DataTable();
                 sqlDa.Fill(dtContacts);
                 dgvContacts.AutoGenerateColumns = false;
                 dgvContacts.DataSource = dtContacts;
                 sqlCon.Close();
+            }  
+        }
+        public void UpdateContact(string connectionString, TextBox name, TextBox number, int id)
+        {
+            SqlConnection sqlCon = new SqlConnection(connectionString);
+            try
+            {
+                sqlCon.Open();
+                MessageBox.Show("połączenie działa");
             }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Błąd połączenia z bazą danych");
+                return;
+            }
+            string command = "update Contacts set name=@name, number=@number Where id=@index";
+            SqlCommand cmdEditData = new SqlCommand(command, sqlCon);
+            cmdEditData.Parameters.AddWithValue("@name", name.Text);
+            cmdEditData.Parameters.AddWithValue("@number", number.Text);
+            cmdEditData.Parameters.AddWithValue("@index", id);
+
+            cmdEditData.ExecuteNonQuery();
+            sqlCon.Close();
         }
     }
 }

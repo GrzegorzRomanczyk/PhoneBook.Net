@@ -30,8 +30,12 @@ namespace PhoneBook
         private void InitializeComponent()
         {
             this.dgvContacts = new System.Windows.Forms.DataGridView();
+            this.btnNowy = new System.Windows.Forms.Button();
+            this.txtSzukaj = new System.Windows.Forms.TextBox();
+            this.btnUsun = new System.Windows.Forms.Button();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.id = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvContacts)).BeginInit();
             this.SuspendLayout();
             // 
@@ -42,15 +46,44 @@ namespace PhoneBook
             this.dgvContacts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvContacts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.name,
-            this.number});
-            this.dgvContacts.Location = new System.Drawing.Point(12, 19);
+            this.number,
+            this.id});
+            this.dgvContacts.Location = new System.Drawing.Point(12, 40);
             this.dgvContacts.Name = "dgvContacts";
             this.dgvContacts.ReadOnly = true;
             this.dgvContacts.RowHeadersWidth = 51;
             this.dgvContacts.RowTemplate.Height = 24;
             this.dgvContacts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvContacts.Size = new System.Drawing.Size(498, 600);
+            this.dgvContacts.Size = new System.Drawing.Size(498, 579);
             this.dgvContacts.TabIndex = 0;
+            this.dgvContacts.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvContacts_CellDoubleClick);
+            // 
+            // btnNowy
+            // 
+            this.btnNowy.Location = new System.Drawing.Point(601, 97);
+            this.btnNowy.Name = "btnNowy";
+            this.btnNowy.Size = new System.Drawing.Size(75, 23);
+            this.btnNowy.TabIndex = 1;
+            this.btnNowy.Text = "Nowy kontakt";
+            this.btnNowy.UseVisualStyleBackColor = true;
+            this.btnNowy.Click += new System.EventHandler(this.btnNowy_Click);
+            // 
+            // txtSzukaj
+            // 
+            this.txtSzukaj.Location = new System.Drawing.Point(12, 12);
+            this.txtSzukaj.Name = "txtSzukaj";
+            this.txtSzukaj.Size = new System.Drawing.Size(498, 22);
+            this.txtSzukaj.TabIndex = 2;
+            // 
+            // btnUsun
+            // 
+            this.btnUsun.Location = new System.Drawing.Point(601, 174);
+            this.btnUsun.Name = "btnUsun";
+            this.btnUsun.Size = new System.Drawing.Size(75, 23);
+            this.btnUsun.TabIndex = 3;
+            this.btnUsun.Text = "Usuń";
+            this.btnUsun.UseVisualStyleBackColor = true;
+            this.btnUsun.Click += new System.EventHandler(this.btnUsun_Click);
             // 
             // name
             // 
@@ -70,25 +103,42 @@ namespace PhoneBook
             this.number.ReadOnly = true;
             this.number.Width = 220;
             // 
+            // id
+            // 
+            this.id.DataPropertyName = "id";
+            this.id.HeaderText = "id";
+            this.id.MinimumWidth = 6;
+            this.id.Name = "id";
+            this.id.ReadOnly = true;
+            this.id.Visible = false;
+            this.id.Width = 125;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 631);
+            this.Controls.Add(this.btnUsun);
+            this.Controls.Add(this.txtSzukaj);
+            this.Controls.Add(this.btnNowy);
             this.Controls.Add(this.dgvContacts);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvContacts)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
         private System.Windows.Forms.DataGridView dgvContacts;
+        private System.Windows.Forms.Button btnNowy;
+        private System.Windows.Forms.TextBox txtSzukaj;
+        private System.Windows.Forms.Button btnUsun;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
         private System.Windows.Forms.DataGridViewTextBoxColumn number;
+        private System.Windows.Forms.DataGridViewTextBoxColumn id;
     }
 }
 
