@@ -21,7 +21,7 @@ namespace PhoneBook
                 try
                 {
                     sqlCon.Open();
-                    MessageBox.Show("połączenie działa");
+                    
                 }
                 catch (Exception)
                 {
@@ -44,7 +44,7 @@ namespace PhoneBook
             try
             {
                 sqlCon.Open();
-                MessageBox.Show("połączenie działa");
+                
             }
             catch (Exception)
             {
@@ -59,6 +59,52 @@ namespace PhoneBook
             cmdEditData.Parameters.AddWithValue("@index", id);
 
             cmdEditData.ExecuteNonQuery();
+            sqlCon.Close();
+        }
+        public void AddContact( string connectionString, TextBox name, TextBox number)
+        {
+            SqlConnection sqlCon = new SqlConnection(connectionString);
+            try
+            {
+                sqlCon.Open();
+                
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Błąd połączenia z bazą danych");
+                return;
+            }
+
+            string command = "Insert Into Contacts(name, number) Values (@name, @number) ";
+            SqlCommand cmdAdd = new SqlCommand(command, sqlCon);
+            cmdAdd.Parameters.AddWithValue("@name",name.Text);
+            cmdAdd.Parameters.AddWithValue("@number",number.Text);
+
+            cmdAdd.ExecuteNonQuery();
+            sqlCon.Close();
+
+        }
+
+        public void DeleteContact(string connectionString, int id)
+        {
+            SqlConnection sqlCon = new SqlConnection(connectionString);
+            try
+            {
+                sqlCon.Open();
+
+            }
+            catch (Exception)
+            {
+
+                MessageBox.Show("Błąd połączenia z bazą danych");
+                return;
+            }
+
+            string command = "Delete From Contacts where id=@index";
+            SqlCommand cmdAdd = new SqlCommand(command, sqlCon);
+            cmdAdd.Parameters.AddWithValue("@index", id);
+            cmdAdd.ExecuteNonQuery();
             sqlCon.Close();
         }
     }

@@ -15,12 +15,14 @@ namespace PhoneBook
         string name;
         string number;
         int index;
-        public FormSelectedContact(string name, string number,int index)
+        int currentIndex;
+        public FormSelectedContact(string name, string number,int index,int currentIndex)
         {
             InitializeComponent();
            this.name= txtName.Text = name;
            this.number= txtNumber.Text = number;
            this.index = index;
+           this.currentIndex = currentIndex;
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -36,9 +38,11 @@ namespace PhoneBook
         private void btnSave_Click(object sender, EventArgs e)
         {
             SetEditModeOff();
- 
+
             DBConnection dBConnection = new DBConnection();
-            dBConnection.UpdateContact(dBConnection.ConnectionString, txtName,txtNumber,index);  
+            dBConnection.UpdateContact(dBConnection.ConnectionString, txtName,txtNumber,index);
+
+            this.Close();
         }
 
         public void btnCancel_Click(object sender, EventArgs e)
