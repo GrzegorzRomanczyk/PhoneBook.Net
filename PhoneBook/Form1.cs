@@ -68,5 +68,11 @@ namespace PhoneBook
                 MessageBox.Show("Brak kontaktów do usuniecia");
             }
          }
+
+        private void txtSzukaj_TextChanged(object sender, EventArgs e)
+        {
+            DBConnection db = new DBConnection();
+            db.Serach(db.ConnectionString, dgvContacts, txtSzukaj);
+        }
     }
 }

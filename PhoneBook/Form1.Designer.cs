@@ -102,6 +102,7 @@ namespace PhoneBook
             this.txtSzukaj.Name = "txtSzukaj";
             this.txtSzukaj.Size = new System.Drawing.Size(498, 22);
             this.txtSzukaj.TabIndex = 2;
+            this.txtSzukaj.TextChanged += new System.EventHandler(this.txtSzukaj_TextChanged);
             // 
             // btnUsun
             // 

@@ -107,5 +107,30 @@ namespace PhoneBook
             cmdAdd.ExecuteNonQuery();
             sqlCon.Close();
         }
+
+        public void Serach(string connectionString, DataGridView dgvContacts,TextBox serach)
+        {
+            using (SqlConnection sqlCon = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    sqlCon.Open();
+
+                }
+                catch (Exception)
+                {
+
+                    MessageBox.Show("Błąd połączenia z bazą danych");
+                    return;
+                }
+
+                SqlDataAdapter sqlDa = new SqlDataAdapter("SELECT * FROM Contacts where concat(name , number) like '%" + serach.Text + "%'", sqlCon);
+                DataTable dtContacts = new DataTable();
+                sqlDa.Fill(dtContacts);
+                dgvContacts.AutoGenerateColumns = false;
+                dgvContacts.DataSource = dtContacts;
+                sqlCon.Close();
+            }
+        }
     }
 }
